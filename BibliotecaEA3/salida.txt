@@ -1,0 +1,62 @@
+﻿
+=== 1. CATÁLOGO (polimorfismo: la misma llamada mostrarInformacion() responde distinto) ===
+[1] Libro general      "Cien años de soledad" - Gabriel García Márquez (Novela) | Disponible | 15 días, multa $1.000/día
+[2] Libro general      "La vorágine" - José Eustasio Rivera (Novela) | Disponible | 15 días, multa $1.000/día
+[3] Libro general      "Clean Code" - Robert C. Martin (Tecnología) | Disponible | 15 días, multa $1.000/día
+[4] Libro general      "El principito" - Antoine de Saint-Exupéry (Infantil) | Disponible | 15 días, multa $1.000/día
+[5] Referencia         "Diccionario de la lengua española" - Real Academia Española (Referencia) | Disponible | 3 días, multa $3.000/día | Diccionario, solo docentes
+[6] Digital (PDF)      "Java: cómo programar" - Paul Deitel (Tecnología) | Disponible | 7 días, multa $0/día | licencias en uso 0/2
+[7] Digital (EPUB)     "Relato de un náufrago" - Gabriel García Márquez (Crónica) | Disponible | 7 días, multa $0/día | licencias en uso 0/1
+
+=== 2. USUARIOS REGISTRADOS ===
+Estudiante Laura Gómez          CC 1001234567  | 0/3 libros | +0 días | Ing. de Software y Datos
+Estudiante Andrés Restrepo      CC 1007654321  | 0/3 libros | +0 días | Sin programa registrado
+Docente    Marta Ospina         CC 43123456    | 0/3 libros | +7 días | Facultad de Ingeniería
+
+=== 3. PRÉSTAMOS DE LAURA Y LÍMITE DE 3 LIBROS (R3, R4) ===
+   OK: Préstamo #1: "Cien años de soledad" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+   OK: Préstamo #2: "Clean Code" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+   OK: Préstamo #3: "El principito" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+   RECHAZADO: Laura Gómez ya tiene 3 libros prestados
+
+=== 4. LIBRO DE REFERENCIA: ESTUDIANTE VS. DOCENTE (sobrescritura de puedeLlevarRestringidos) ===
+   RECHAZADO: Un usuario de tipo estudiante no puede llevar libros de tipo referencia
+   OK: Préstamo #4: "Diccionario de la lengua española" -> Marta Ospina (2026-11-03) | ACTIVO, vence 2026-11-13
+   RECHAZADO: "Cien años de soledad" no está disponible
+
+=== 5. LIBRO DIGITAL CON LICENCIAS (sobrescritura de estaDisponible y marcarPrestado) ===
+   OK: Préstamo #5: "Java: cómo programar" -> Andrés Restrepo (2026-11-03) | ACTIVO, vence 2026-11-10
+   OK: Préstamo #6: "Java: cómo programar" -> Marta Ospina (2026-11-03) | ACTIVO, vence 2026-11-17
+   Estado: [6] Digital (PDF)      "Java: cómo programar" - Paul Deitel (Tecnología) | Prestado | 7 días, multa $0/día | licencias en uso 2/2
+   RECHAZADO (por id y cédula): "Java: cómo programar" no está disponible
+
+=== 6. BÚSQUEDAS (R6, con sobrecarga de buscarPorAutor) ===
+Título contiene "java":
+   Java: cómo programar - Paul Deitel (prestado)
+Autor "García Márquez" (todos):
+   Cien años de soledad - Gabriel García Márquez (prestado)
+   Relato de un náufrago - Gabriel García Márquez (disponible)
+Autor "García Márquez" (solo disponibles):
+   Relato de un náufrago - Gabriel García Márquez (disponible)
+
+=== 7. DEVOLUCIONES CON RETRASO (multa calculada según el tipo de libro) ===
+   OK: Préstamo #1: "Cien años de soledad" -> Laura Gómez (2026-11-03) | DEVUELTO 2026-11-22, retraso 4 días, multa $4.000
+   OK: Préstamo #4: "Diccionario de la lengua española" -> Marta Ospina (2026-11-03) | DEVUELTO 2026-11-22, retraso 9 días, multa $27.000
+   OK: Préstamo #5: "Java: cómo programar" -> Andrés Restrepo (2026-11-03) | DEVUELTO 2026-11-22, retraso 12 días, multa $0
+   ERROR: "La vorágine" no tiene un préstamo activo con Laura Gómez
+
+=== 8. AHORA LAURA PUEDE PEDIR OTRO LIBRO ===
+   OK: Préstamo #7: "La vorágine" -> Laura Gómez (2026-11-22) | ACTIVO, vence 2026-12-07
+
+=== 9. PRÉSTAMOS ACTIVOS (R7) ===
+Préstamo #2: "Clean Code" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+Préstamo #3: "El principito" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+Préstamo #6: "Java: cómo programar" -> Marta Ospina (2026-11-03) | ACTIVO, vence 2026-11-17
+Préstamo #7: "La vorágine" -> Laura Gómez (2026-11-22) | ACTIVO, vence 2026-12-07
+
+=== 10. HISTORIAL DE LAURA ===
+Préstamo #1: "Cien años de soledad" -> Laura Gómez (2026-11-03) | DEVUELTO 2026-11-22, retraso 4 días, multa $4.000
+Préstamo #2: "Clean Code" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+Préstamo #3: "El principito" -> Laura Gómez (2026-11-03) | ACTIVO, vence 2026-11-18
+Préstamo #7: "La vorágine" -> Laura Gómez (2026-11-22) | ACTIVO, vence 2026-12-07
+Estudiante Laura Gómez          CC 1001234567  | 3/3 libros | +0 días | Ing. de Software y Datos
